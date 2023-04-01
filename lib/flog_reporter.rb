@@ -31,8 +31,10 @@ def prompt(code)
     when I need to tell you something in english,
     I will do so by putting text inside curly brackets {like this}.
 
-  { how to refactor the next method using simple code instead of smart code,
+  { refactor the next method using simple code instead of smart code,
     you can rename the variables to improve readability,
+    you can create more the methods to improve readability,
+    you can use shopify style guide ruby,
     include comments that explain what the method or the class or one line is doing}
 
     ```
