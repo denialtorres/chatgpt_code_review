@@ -5,32 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flog Report</title>
   <style>
+    <%= Rouge::Themes::Base16::Solarized.mode(:dark).render(scope: '.highlight') %>
     body { font-family: Arial, sans-serif; }
     h1 { color: #2d3748; }
     h2 { color: #4a5568; }
     .method-info { margin-bottom: 20px; }
-
-    pre {
-      background-color: #282c34;
-      border: 1px solid #4d4d4d;
-      border-radius: 4px;
-      padding: 12px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-      font-size: 14px;
-      line-height: 1.5;
-      tab-size: 4;
-    }
-
-    code {
-      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-      font-size: 14px;
-      line-height: 1.5;
-      tab-size: 4;
-      color: #abb2bf;
-    }
   </style>
 </head>
 <body>
@@ -39,11 +18,11 @@
     <div class="method-info">
       <h2><%= method[:class] %>#<%= method[:method] %></h2>
       <p>Path: <%= method[:path] %></p>
-      <pre><code><%= method[:code] %></code></pre>
+      <pre class="highlight"><code><%= highlight_ruby_code(method[:code]) %></code></pre>
     </div>
     <div class="method-info">
       <h2>Suggestion by the 🤖</h2>
-      <pre><code><%= method[:sugestion] %></code></pre>
+      <pre class="highlight"><code><%= highlight_ruby_code(method[:suggestion]) %></code></pre>
     </div>
   <% end %>
 </body>

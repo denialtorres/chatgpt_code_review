@@ -8,12 +8,15 @@ require 'pry'
 require 'active_support'
 require 'action_view'
 require 'reviewer_configurable'
+require "openai"
+require_relative 'template_context'
 
 
 def generate_html_report(method_data)
+  context = ChatGPTCodeReview::TemplateContext.new(method_data)
   erb_template = File.read(File.expand_path('../templates/report.erb', __FILE__))
   renderer = ERB.new(erb_template)
-  output = renderer.result(binding)
+  output = renderer.result(context.context_binding)
 
   # Save the HTML report to a file
   report_path = File.join(Dir.pwd, 'public', 'flog_report.html')
@@ -35,7 +38,8 @@ def prompt(code)
     you can rename the variables to improve readability,
     you can create more the methods to improve readability,
     you can use shopify style guide ruby,
-    include comments that explain what the method or the class or one line is doing}
+    include comments that explain what is happening
+    }
 
     ```
     #{code}
@@ -61,7 +65,7 @@ def get_suggestion(code)
           temperature: 0.7
       })
 
-  return response.dig("choices").first.dig("message", "content")
+  return response.dig("choices").first.dig("message", "content")&.gsub(/(```ruby\n)|(```)/, '')
 end
 
 module FlogReporter
@@ -102,7 +106,7 @@ module FlogReporter
               suggestion: ""
             }
 
-            method_details[:sugestion] = get_suggestion(method_details[:code])
+            method_details[:suggestion] = get_suggestion(method_details[:code])
 
             method_data << method_details
            puts "  Method Source:\n\n  #{method_obj.source.strip}\n\n"
