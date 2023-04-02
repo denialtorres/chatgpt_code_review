@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'octokit', '~> 4.0' # For interacting with GitHub API
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_dependency 'flog', '~> 4.6'
-  spec.add_dependency 'method_source', '~> 1.0'
+  spec.add_dependency 'method_source', '>= 0.9.2'
   spec.add_dependency 'rainbow', '~> 3.0'
   spec.add_dependency 'activesupport', '>= 5.0'
   spec.add_dependency 'actionview', '>= 5.0'
