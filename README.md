@@ -22,7 +22,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Include a new initializer `config/initializers/reviewer.rb`
+the next configuration
+```ruby
+# config/initializers/reviewer_configurable.rb
+require 'reviewer_configurable'
+
+ReviewerConfigurable.configure do |config|
+  # the desired complexity score
+  config.threshold = 30
+  # the directories you want to be scanned
+  config.dirs = %w(app lib)
+  # your ChatGPT key
+  config.chatgpt ="sk-*****"
+end
+```
 
 ## Development
 
