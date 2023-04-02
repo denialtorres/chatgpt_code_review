@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'http', '~> 4.4' # For making HTTP requests to OpenAI API
+  spec.add_dependency 'http', '>= 4.0.0' # For making HTTP requests to OpenAI API
   spec.add_dependency 'octokit', '~> 4.0' # For interacting with GitHub API
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_dependency 'flog', '~> 4.6'
